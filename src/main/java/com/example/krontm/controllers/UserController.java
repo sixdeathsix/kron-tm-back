@@ -14,9 +14,9 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity auth(@RequestParam String login, @RequestParam String password) {
+    public ResponseEntity auth(@RequestBody Users user) {
         try {
-            return ResponseEntity.ok(userService.auth(login, password));
+            return ResponseEntity.ok(userService.auth(user.getLogin(), user.getPassword()));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

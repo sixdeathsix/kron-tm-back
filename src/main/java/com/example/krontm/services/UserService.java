@@ -11,7 +11,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public Users auth(String login, String password) throws Exception {
+    public String auth(String login, String password) throws Exception {
 
         Users user = userRepository.findByLoginAndPassword(login, password);
 
@@ -19,7 +19,9 @@ public class UserService {
             throw new Exception("Сотрудник не найден");
         }
 
-        return Users.toModel(user);
+        String token = user.getName() + "token";
+
+        return token;
     }
 
 }
